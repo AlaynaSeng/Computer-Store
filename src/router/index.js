@@ -5,47 +5,47 @@ const router = createRouter({
         {
             path:'/',
             name:'home',
-            component: () => import('../components/Home.vue')
+            component: () => import('../views/Home.vue')
         },
         {
             path:'/customer',
             name:'customer',
-            component: () => import('../components/Customer.vue')
+            component: () => import('../views/Customer.vue')
         },
         {
             path:'/employee',
             name:'employee',
-            component: () => import('../components/Employee.vue')
+            component: () => import('../views/Employee.vue')
         },
         {
             path:'/category',
             name:'category',
-            component: () => import('../components/Category.vue')
+            component: () => import('../views/Category.vue')
         },
         {
             path:'/product',
             name:'product',
-            component: () => import('../components/Product.vue')
+            component: () => import('../views/Product.vue')
         },
         {
             path:'/supplier',
             name:'supplier',
-            component: () => import('../components/Supplier.vue')
+            component: () => import('../views/Supplier.vue')
         },
         {
             path:'/shipper',
             name:'shipper',
-            component: () => import('../components/Shipper.vue')
+            component: () => import('../views/Shipper.vue')
         },
         {
             path:'/create',
             name:'create',
-            component: () => import('../components/CreateOrder.vue')
+            component: () => import('../views/CreateOrder.vue')
         },
         {
             path:'/orders',
             name:'orders',
-            component: () => import('../components/Orders.vue')
+            component: () => import('../views/Orders.vue')
         },
     ]
 })

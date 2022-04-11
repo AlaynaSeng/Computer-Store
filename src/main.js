@@ -1,12 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from "./router/index"
-// const conn = require('./dbconnection/dbconnect');
 
-// conn.connect(err => {
-//     if (err) throw err;
-//     console.log('Connected to MySQL DB');
-// });
+//git add .
+// git commit -m "(message)"
+//git push -u origin main
 
 
 const app = createApp(App)
