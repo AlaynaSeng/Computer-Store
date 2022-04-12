@@ -1,13 +1,25 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
 
-onMounted(() => {});
-function submitCustomer() {}
+onMounted(() => {
+  
+});
+function submitCustomer(e) {
+  let form = e.target;
+  let data = Object.fromEntries(new FormData(form));
+  fetch("http://localhost:4000/customer", {
+    method: "POST",
+    headers: {
+      "content-type":"application/json"
+    },
+    body: JSON.stringify(data)
+  });
+}
 </script>
 
 <template>
   <div id="customer">
-    <form @submit.prevent="submitCustomer" id="customerForm">
+    <form @submit="submitCustomer" id="customerForm">
       <h4>First Name</h4>
       <input type="text" name="fname" id="fname" class="form-control" required/>
       <br />
