@@ -1,8 +1,16 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 
-function submitOrder(){
-  
+function submitOrder(e){
+  let form = e.target;
+  let data = Object.fromEntries(new FormData(form));
+  fetch("http://localhost:4000/order", {
+    method: "POST",
+    headers: {
+      "content-type":"application/json"
+    },
+    body: JSON.stringify(data)
+  });
 }
 
 </script>

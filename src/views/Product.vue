@@ -1,7 +1,17 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 
-function submitProduct() {}
+function submitProduct(e) {
+  let form = e.target;
+  let data = Object.fromEntries(new FormData(form));
+  fetch("http://localhost:4000/product", {
+    method: "POST",
+    headers: {
+      "content-type":"application/json"
+    },
+    body: JSON.stringify(data)
+  });
+}
 </script>
 
 <template>

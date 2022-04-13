@@ -14,12 +14,13 @@ function submitCustomer(e) {
     },
     body: JSON.stringify(data)
   });
+  console.log(data)
 }
 </script>
 
 <template>
   <div id="customer">
-    <form @submit="submitCustomer" id="customerForm">
+    <form @submit.prevent="submitCustomer" id="customerForm">
       <h4>First Name</h4>
       <input type="text" name="fname" id="fname" class="form-control" required/>
       <br />
