@@ -37,7 +37,22 @@ function submitShipper(e) {
         <th>Edit</th>
         <th>Delete</th>
       </thead>
-      <tbody id="shipperTBody"></tbody>
+      <tbody id="shipperTBody">
+        <tr v-for="(shipper, i) in shippers">
+          <td>
+            {{shipper.name}}
+          </td>
+          <td>
+            {{shipper.phone}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-success">Edit</button>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>

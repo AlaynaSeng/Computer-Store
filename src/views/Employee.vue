@@ -48,7 +48,31 @@ function submitEmployee(e) {
         <th>Edit</th>
         <th>Delete</th>
       </thead>
-      <tbody id="employeeTBody"></tbody>
+      <tbody id="employeeTBody">
+        <tr v-for="(employee, i) in employees">
+          <td>
+            {{employee.employeeid}}
+          </td>
+          <td>
+            {{employee.fname}}
+          </td>
+          <td>
+            {{employee.lname}}
+          </td>
+          <td>
+            {{employee.bday}}
+          </td>
+          <td>
+            {{employee.email}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-success">Edit</button>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>

@@ -51,7 +51,34 @@ function submitSupplier(e) {
         <th>Edit</th>
         <th>Delete</th>
       </thead>
-      <tbody id="supplierTBody"></tbody>
+      <tbody id="supplierTBody">
+        <tr v-for="(supplier, i) in suppliers">
+          <td>
+            {{supplier.name}}
+          </td>
+          <td>
+            {{supplier.address}}
+          </td>
+          <td>
+            {{supplier.city}}
+          </td>
+          <td>
+            {{supplier.zip}}
+          </td>
+          <td>
+            {{supplier.country}}
+          </td>
+          <td>
+            {{supplier.phone}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-success">Edit</button>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>

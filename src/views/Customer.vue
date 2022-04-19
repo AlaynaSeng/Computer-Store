@@ -4,6 +4,7 @@ import { ref, watch, onMounted } from "vue";
 onMounted(() => {
 
 });
+
 function submitCustomer(e) {
   let form = e.target;
   let data = Object.fromEntries(new FormData(form));
@@ -15,13 +16,6 @@ function submitCustomer(e) {
     body: JSON.stringify(data)
   });
   console.log(data)
-
-  fetch("http://localhost:4000/customer", {
-    method: "GET",
-    headers: {
-      "content-type":"application/json"
-    },
-  });
 }
 </script>
 
@@ -66,7 +60,35 @@ function submitCustomer(e) {
         <th>Delete</th>
       </thead>
       <tbody id="customerTBody">
-
+        <tr v-for="(customer, i) in customers">
+          <td>
+            {{customer.fname}}
+          </td>
+          <td>
+            {{customer.lname}}
+          </td>
+          <td>
+            {{customer.address}}
+          </td>
+          <td>
+            {{customer.city}}
+          </td>
+          <td>
+            {{customer.zip}}
+          </td>
+          <td>
+            {{customer.country}}
+          </td>
+          <td>
+            {{customer.phone}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-success">Edit</button>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

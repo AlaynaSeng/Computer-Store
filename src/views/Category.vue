@@ -38,7 +38,22 @@ function submitCategory(e) {
         <th>Edit</th>
         <th>Delete</th>
       </thead>
-      <tbody id="categoryTBody"></tbody>
+      <tbody id="categoryTBody">
+        <tr v-for="(category, i) in categories">
+          <td>
+            {{category.name}}
+          </td>
+          <td>
+            {{category.description}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-success">Edit</button>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>
