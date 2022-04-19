@@ -2,7 +2,7 @@
 import { ref, watch, onMounted } from "vue";
 
 onMounted(() => {
-  
+
 });
 function submitCustomer(e) {
   let form = e.target;
@@ -15,12 +15,19 @@ function submitCustomer(e) {
     body: JSON.stringify(data)
   });
   console.log(data)
+
+  fetch("http://localhost:4000/customer", {
+    method: "GET",
+    headers: {
+      "content-type":"application/json"
+    },
+  });
 }
 </script>
 
 <template>
   <div id="customer">
-    <form @submit.prevent="submitCustomer" id="customerForm">
+    <form @submit="submitCustomer" id="customerForm">
       <h4>First Name</h4>
       <input type="text" name="fname" id="fname" class="form-control" required/>
       <br />

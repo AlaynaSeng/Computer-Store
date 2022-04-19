@@ -11,6 +11,7 @@ function submitCategory(e) {
     },
     body: JSON.stringify(data)
   });
+  console.log(data)
 }
 </script>
 

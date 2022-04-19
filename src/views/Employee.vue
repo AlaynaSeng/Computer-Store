@@ -11,6 +11,7 @@ function submitEmployee(e) {
     },
     body: JSON.stringify(data)
   });
+  console.log(data)
 }
 </script>
 

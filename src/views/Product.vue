@@ -1,6 +1,18 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
 
+// onMounted(() => {
+//     let category = '';
+//       fetch("http://localhost:4000/category", { method: 'GET' })
+//           .then(response => response.json())
+//           .then(category => {
+//               cate.forEach(ct => {
+//                   category += `<option value="${ct.categoryid}">${ct.name}</option>`
+//               });
+//               document.querySelector('#categoryid').innerHTML = category;
+//           });
+// });
+
 function submitProduct(e) {
   let form = e.target;
   let data = Object.fromEntries(new FormData(form));
@@ -11,6 +23,7 @@ function submitProduct(e) {
     },
     body: JSON.stringify(data)
   });
+  console.log(data);
 }
 </script>
 
