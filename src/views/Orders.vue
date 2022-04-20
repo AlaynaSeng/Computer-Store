@@ -1,6 +1,15 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
+
+let orders = ref([]);
+
+onMounted(async () => {
+  let res = await fetch("http://localhost:4000/order", {method: "GET"});
+  orders.value = await res.json();
+});
+
 </script>
+
 
 <template>
   <div id="orders">
@@ -15,7 +24,34 @@ import { ref, watch } from "vue";
         <th>Edit</th>
         <th>Delete</th>
       </thead>
-      <tbody id="orderTBody"></tbody>
+      <tbody id="orderTBody">
+        <tr v-for="(order) in orders" :key="order.id">
+          <td>
+            {{order.orderid}}
+          </td>
+          <td>
+            {{order.pname}}
+          </td>
+          <td>
+            {{order.cname}}
+          </td>
+          <td>
+            {{order.date}}
+          </td>
+          <td>
+            {{order.ename}}
+          </td>
+          <td>
+            {{order.sname}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-success">Edit</button>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>
