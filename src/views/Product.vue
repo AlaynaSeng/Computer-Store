@@ -27,6 +27,14 @@ function submitProduct(e) {
   });
   console.log(data);
 }
+
+function deleteProduct(product) {
+  fetch(`http://localhost:4000/product/deleteProduct/${product.productid}`, {
+      method: "Delete",
+      headers: { "content-type": "application/json" },
+    });
+    location.reload();
+}
 </script>
 
 <template>
@@ -88,7 +96,7 @@ function submitProduct(e) {
             {{product.sname}}
           </td>
           <td>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-danger" @click="deleteProduct(product)">Delete</button>
           </td>
           <td>
             <button type="button" class="btn btn-success">Edit</button>

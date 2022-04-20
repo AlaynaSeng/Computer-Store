@@ -20,6 +20,14 @@ function submitCategory(e) {
   });
   console.log(data)
 }
+
+function deleteCategory(category) {
+  fetch(`http://localhost:4000/category/deleteCategory/${category.categoryid}`, {
+      method: "Delete",
+      headers: { "content-type": "application/json" },
+    });
+    location.reload();
+}
 </script>
 
 <template>
@@ -54,7 +62,7 @@ function submitCategory(e) {
             {{category.description}}
           </td>
           <td>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-danger" @click="deleteCategory(category)">Delete</button>
           </td>
           <td>
             <button type="button" class="btn btn-success">Edit</button>

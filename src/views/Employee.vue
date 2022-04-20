@@ -21,6 +21,15 @@ function submitEmployee(e) {
   });
   console.log(data)
 }
+
+
+function deleteEmployee(employee) {
+  fetch(`http://localhost:4000/employee/deleteEmployee/${employee.employeeid}`, {
+      method: "Delete",
+      headers: { "content-type": "application/json" },
+    });
+    location.reload();
+}
 </script>
 
 <template>
@@ -74,7 +83,7 @@ function submitEmployee(e) {
             {{employee.email}}
           </td>
           <td>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-danger" @click="deleteEmployee(employee)">Delete</button>
           </td>
           <td>
             <button type="button" class="btn btn-success">Edit</button>

@@ -21,6 +21,14 @@ function submitCustomer(e) {
   console.log(data)
 
 }
+
+function deleteCustomer(customer) {
+  fetch(`http://localhost:4000/customer/deleteCustomer/${customer.customerid}`, {
+      method: "Delete",
+      headers: { "content-type": "application/json" },
+    });
+    location.reload();
+}
 </script>
 
 <template>
@@ -87,7 +95,7 @@ function submitCustomer(e) {
             {{customer.phone}}
           </td>
           <td>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-danger" @click="deleteCustomer(customer)">Delete</button>
           </td>
           <td>
             <button type="button" class="btn btn-success">Edit</button>

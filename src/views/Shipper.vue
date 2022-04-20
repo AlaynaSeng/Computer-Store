@@ -20,6 +20,14 @@ function submitShipper(e) {
   });
   console.log(data)
 }
+
+function deleteShipper(shipper) {
+  fetch(`http://localhost:4000/shipper/deleteShipper/${shipper.shipperid}`, {
+      method: "Delete",
+      headers: { "content-type": "application/json" },
+    });
+    location.reload();
+}
 </script>
 
 <template>
@@ -53,7 +61,7 @@ function submitShipper(e) {
             {{shipper.phone}}
           </td>
           <td>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-danger" @click="deleteShipper(shipper)">Delete</button>
           </td>
           <td>
             <button type="button" class="btn btn-success">Edit</button>

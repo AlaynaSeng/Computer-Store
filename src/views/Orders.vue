@@ -8,6 +8,14 @@ onMounted(async () => {
   orders.value = await res.json();
 });
 
+
+function deleteOrder(order) {
+  fetch(`http://localhost:4000/order/deleteOrder/${order.orderid}`, {
+      method: "Delete",
+      headers: { "content-type": "application/json" },
+    });
+    location.reload();
+}
 </script>
 
 
@@ -45,7 +53,7 @@ onMounted(async () => {
             {{order.sname}}
           </td>
           <td>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-danger" @click="deleteOrder(order)">Delete</button>
           </td>
           <td>
             <button type="button" class="btn btn-success">Edit</button>
