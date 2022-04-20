@@ -1,6 +1,13 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
 
+let suppliers = ref([]);
+
+onMounted(async () => {
+  let res = await fetch("http://localhost:4000/supplier", {method: "GET",});
+  suppliers.value = await res.json();
+});
+
 function submitSupplier(e) {
   let form = e.target;
   let data = Object.fromEntries(new FormData(form));
@@ -48,11 +55,11 @@ function submitSupplier(e) {
         <th>Zip</th>
         <th>Country</th>
         <th>Phone</th>
-        <th>Edit</th>
         <th>Delete</th>
+        <th>Edit</th>
       </thead>
       <tbody id="supplierTBody">
-        <tr v-for="(supplier, i) in suppliers">
+        <tr v-for="(supplier) in suppliers" :key="supplier.id">
           <td>
             {{supplier.name}}
           </td>

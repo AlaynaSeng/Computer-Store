@@ -1,6 +1,13 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
 
+let shippers = ref([]);
+
+onMounted(async () => {
+  let res = await fetch("http://localhost:4000/shipper", {method: "GET",});
+  shippers.value = await res.json();
+});
+
 function submitShipper(e) {
   let form = e.target;
   let data = Object.fromEntries(new FormData(form));
@@ -34,11 +41,11 @@ function submitShipper(e) {
       <thead>
         <th>Name</th>
         <th>Phone</th>
-        <th>Edit</th>
         <th>Delete</th>
+        <th>Edit</th>
       </thead>
       <tbody id="shipperTBody">
-        <tr v-for="(shipper, i) in shippers">
+        <tr v-for="(shipper) in shippers" :key="shipper.id">
           <td>
             {{shipper.name}}
           </td>

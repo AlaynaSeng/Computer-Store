@@ -1,6 +1,13 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
 
+let categories = ref([]);
+
+onMounted(async () => {
+  let res = await fetch("http://localhost:4000/category", {method: "GET",});
+  categories.value = await res.json();
+});
+
 function submitCategory(e) {
   let form = e.target;
   let data = Object.fromEntries(new FormData(form));
@@ -35,11 +42,11 @@ function submitCategory(e) {
       <thead>
         <th>Name</th>
         <th>Description</th>
-        <th>Edit</th>
         <th>Delete</th>
+        <th>Edit</th>
       </thead>
       <tbody id="categoryTBody">
-        <tr v-for="(category, i) in categories">
+        <tr v-for="(category) in categories" :key="category.id">
           <td>
             {{category.name}}
           </td>

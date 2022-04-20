@@ -1,17 +1,12 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
 
-// onMounted(() => {
-//     let category = '';
-//       fetch("http://localhost:4000/category", { method: 'GET' })
-//           .then(response => response.json())
-//           .then(category => {
-//               cate.forEach(ct => {
-//                   category += `<option value="${ct.categoryid}">${ct.name}</option>`
-//               });
-//               document.querySelector('#categoryid').innerHTML = category;
-//           });
-// });
+let products = ref([]);
+
+onMounted(async () => {
+  let res = await fetch("http://localhost:4000/product", {method: "GET",});
+  products.value = await res.json();
+});
 
 function submitProduct(e) {
   let form = e.target;
@@ -61,7 +56,9 @@ function submitProduct(e) {
       <th>Edit</th>
       <th>Delete</th>
     </thead>
-    <tbody id="productTBody"></tbody>
+    <tbody id="productTBody">
+      
+    </tbody>
   </table>
 </template>
 

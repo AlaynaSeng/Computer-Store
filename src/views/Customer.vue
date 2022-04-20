@@ -1,8 +1,11 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
 
-onMounted(() => {
+let customers = ref([]);
 
+onMounted(async () => {
+  let res = await fetch("http://localhost:4000/customer", {method: "GET",});
+  customers.value = await res.json();
 });
 
 function submitCustomer(e) {
@@ -16,6 +19,7 @@ function submitCustomer(e) {
     body: JSON.stringify(data)
   });
   console.log(data)
+
 }
 </script>
 
@@ -56,11 +60,11 @@ function submitCustomer(e) {
         <th>Zip</th>
         <th>Country</th>
         <th>Phone</th>
-        <th>Edit</th>
         <th>Delete</th>
+        <th>Edit</th>
       </thead>
       <tbody id="customerTBody">
-        <tr v-for="(customer, i) in customers">
+        <tr v-for="(customer) in customers" :key="customer.id">
           <td>
             {{customer.fname}}
           </td>
