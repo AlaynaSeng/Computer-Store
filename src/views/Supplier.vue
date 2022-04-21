@@ -95,11 +95,49 @@ function deleteSupplier(supplier) {
         </tr>
       </tbody>
     </table>
+
+    <div class="modal fade" id="edit-suppliers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update Supplier</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+        <div class="modal-body">
+            <form id="supplierUpdateForm">
+              <h4>Name</h4>
+              <input type="text" name="name" id="uname" class="form-control" required/>
+              <br />
+              <h4>Address</h4>
+              <input type="text" name="address" id="naddress" class="form-control" required/>
+              <br />
+              <h4>City</h4>
+              <input type="text" name="city" id="ncity" class="form-control" required/>
+              <br />
+              <h4>Zip</h4>
+              <input type="text" name="zip" id="nzip" class="form-control" required />
+              <br />
+              <h4>Country</h4>
+              <input type="number" name="country" id="ncountry" class="form-control" required />
+              <br />
+              <h4>Phone Number</h4>
+              <input type="text" name="phone" id="nphone" class="form-control" required/>
+              <br />
+              <button type="submit" class="btn btn-info">Submit Supplier</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" @click="updateSupplier">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
-#supplierForm {
+#supplierForm, #supplierUpdateForm {
   text-align: center;
   margin-top: 30px;
   border: 2px dotted black;

@@ -23,6 +23,35 @@ function submitEmployee(e) {
 }
 
 
+let fnameInput = ref(null);
+let lnameInput = ref(null);
+let bdayInput = ref(null);
+let emailInput = ref(null);
+let IDInput = ref(null);
+
+function editCustomer(employee){
+  fnameInput.value.value = employee.fname;
+  lnameInput.value.value = employee.lname;
+  bdayInput.value.value = employee.bday;
+  emailInput.value.value = employee.email;
+  IDInput.value.value = employee.employeeid
+  let modal = new bootstrap.Modal(document.querySelector('#edit-employee'));
+  modal.show();
+}
+
+function updateEmployee(e){
+  let form = e.target;
+  let data = Object.fromEntries(new FormData(form));
+  fetch("http://localhost:4000/employee/update", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  console.log(data)
+}
+
 function deleteEmployee(employee) {
   fetch(`http://localhost:4000/employee/deleteEmployee/${employee.employeeid}`, {
       method: "Delete",
@@ -77,7 +106,7 @@ function deleteEmployee(employee) {
             {{employee.lname}}
           </td>
           <td>
-            {{employee.bday}}
+            {{employee.bday.split("T")[0]}}
           </td>
           <td>
             {{employee.email}}
@@ -91,10 +120,47 @@ function deleteEmployee(employee) {
         </tr>
       </tbody>
     </table>
+
+    <div class="modal fade" id="edit-employee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update Employee</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+        <div class="modal-body">
+            <form id="employeeUpdateForm">
+              <h4>First Name</h4>
+              <input type="text" name="fname" id="nfname" class="form-control" ref="fnameInput" required/>
+              <br />
+              <h4>Last Name</h4>
+              <input type="text" name="lname" id="nlname" class="form-control" ref="lnameInput" required/>
+              <br />
+              <h4>Birthdate</h4>
+              <input type="date" name="bday" id="nbday" class="form-control" ref="bdayInput" required/>
+              <br />
+              <h4>Email</h4>
+              <input type="text" name="email" id="nemail" class="form-control" ref="emailInput" required />
+              <br />
+              <button type="submit" class="btn btn-info">Submit Employee</button>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" @click="updateEmployee">Save changes</button>
+          </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
+ #employeeUpdateForm{
+   text-align: center;
+    padding: 30px;
+ }
+
 #employeeForm {
   text-align: center;
   margin-top: 30px;

@@ -44,7 +44,7 @@ function deleteOrder(order) {
             {{order.cname}}
           </td>
           <td>
-            {{order.date}}
+            {{order.date.split("T")[0]}}
           </td>
           <td>
             {{order.ename}}

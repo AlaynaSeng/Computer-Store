@@ -69,11 +69,37 @@ function deleteShipper(shipper) {
         </tr>
       </tbody>
     </table>
+
+     <div class="modal fade" id="edit-shipper" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update Customer</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+        <div class="modal-body">
+            <form id="shipperUpdateForm">
+              <h4>Name</h4>
+              <input type="text" name="name" id="uname" class="form-control" required/>
+              <br />
+              <h4>Phone Number</h4>
+              <input type="text" name="phone" id="nphone" class="form-control" required/>
+              <br />
+              <button type="submit" class="btn btn-info">Submit Shipper</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" @click="updateShipper">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
-#shipperForm {
+#shipperForm, #shipperUpdateForm {
   text-align: center;
   margin-top: 30px;
   border: 2px dotted black;
