@@ -27,7 +27,11 @@ function submitOrder(e){
     },
     body: JSON.stringify(data)
   });
+  alert("Your order had been submitted and processed! Go to the All Orders tab to see your order.")
+  location.reload();
 }
+
+
 
 </script>
 

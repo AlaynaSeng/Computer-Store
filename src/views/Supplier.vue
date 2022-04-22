@@ -21,6 +21,40 @@ function submitSupplier(e) {
   console.log(data)
 }
 
+let nameInput = ref(null);
+let addressInput = ref(null);
+let cityInput = ref(null);
+let zipInput = ref(null);
+let countryInput = ref(null);
+let phoneInput = ref(null);
+let IDInput = ref(null);
+
+function editSupplier(supplier){
+  nameInput.value.value = supplier.name;
+  addressInput.value.value = supplier.address;
+  cityInput.value.value = supplier.city;
+  zipInput.value.value = supplier.zip;
+  countryInput.value.value = supplier.country;
+  phoneInput.value.value = supplier.phone;
+  IDInput.value.value = supplier.supplierid
+  let modal = new bootstrap.Modal(document.querySelector('#edit-supplier'));
+  modal.show();
+}
+
+function updateSupplier(e){
+  let form = e.target;
+  let data = Object.fromEntries(new FormData(form));
+  fetch("http://localhost:4000/supplier/update", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  console.log(data)
+}
+
+
 function deleteSupplier(supplier) {
   fetch(`http://localhost:4000/supplier/deleteSupplier/${supplier.supplierid}`, {
       method: "Delete",
@@ -90,13 +124,13 @@ function deleteSupplier(supplier) {
             <button type="button" class="btn btn-danger" @click="deleteSupplier(supplier)">Delete</button>
           </td>
           <td>
-            <button type="button" class="btn btn-success">Edit</button>
+            <button type="button" class="btn btn-success" @click="editSupplier(supplier)">Edit</button>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <div class="modal fade" id="edit-suppliers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="edit-supplier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -104,32 +138,33 @@ function deleteSupplier(supplier) {
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
         <div class="modal-body">
-            <form id="supplierUpdateForm">
+            <form id="supplierUpdateForm" @submit="updateSupplier">
               <h4>Name</h4>
-              <input type="text" name="name" id="uname" class="form-control" required/>
+              <input type="text" name="name" id="uname" class="form-control" ref="nameInput" required/>
               <br />
               <h4>Address</h4>
-              <input type="text" name="address" id="naddress" class="form-control" required/>
+              <input type="text" name="address" id="naddress" class="form-control" ref="addressInput" required/>
               <br />
               <h4>City</h4>
-              <input type="text" name="city" id="ncity" class="form-control" required/>
+              <input type="text" name="city" id="ncity" class="form-control" ref="cityInput" required/>
               <br />
               <h4>Zip</h4>
-              <input type="text" name="zip" id="nzip" class="form-control" required />
+              <input type="number" name="zip" id="nzip" class="form-control" ref="zipInput" required />
               <br />
               <h4>Country</h4>
-              <input type="number" name="country" id="ncountry" class="form-control" required />
+              <input type="text" name="country" id="ncountry" class="form-control" ref="countryInput" required />
               <br />
               <h4>Phone Number</h4>
-              <input type="text" name="phone" id="nphone" class="form-control" required/>
+              <input type="text" name="phone" id="nphone" class="form-control" ref="phoneInput" required/>
               <br />
-              <button type="submit" class="btn btn-info">Submit Supplier</button>
-            </form>
-          </div>
+              <input type="hidden" name="supplierid" id="supplierid" ref="IDInput">
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" @click="updateSupplier">Save changes</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
           </div>
+            </form>
+          </div>
+
         </div>
       </div>
     </div>
@@ -137,7 +172,13 @@ function deleteSupplier(supplier) {
 </template>
 
 <style scoped>
-#supplierForm, #supplierUpdateForm {
+
+#supplierUpdateForm{
+    text-align: center;
+    padding: 30px;
+}
+
+#supplierForm {
   text-align: center;
   margin-top: 30px;
   border: 2px dotted black;

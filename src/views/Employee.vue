@@ -29,7 +29,7 @@ let bdayInput = ref(null);
 let emailInput = ref(null);
 let IDInput = ref(null);
 
-function editCustomer(employee){
+function editEmployee(employee){
   fnameInput.value.value = employee.fname;
   lnameInput.value.value = employee.lname;
   bdayInput.value.value = employee.bday;
@@ -115,7 +115,7 @@ function deleteEmployee(employee) {
             <button type="button" class="btn btn-danger" @click="deleteEmployee(employee)">Delete</button>
           </td>
           <td>
-            <button type="button" class="btn btn-success">Edit</button>
+            <button type="button" class="btn btn-success" @click="editEmployee(employee)">Edit</button>
           </td>
         </tr>
       </tbody>
@@ -129,7 +129,7 @@ function deleteEmployee(employee) {
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
         <div class="modal-body">
-            <form id="employeeUpdateForm">
+            <form id="employeeUpdateForm" @submit="updateEmployee">
               <h4>First Name</h4>
               <input type="text" name="fname" id="nfname" class="form-control" ref="fnameInput" required/>
               <br />
@@ -142,10 +142,10 @@ function deleteEmployee(employee) {
               <h4>Email</h4>
               <input type="text" name="email" id="nemail" class="form-control" ref="emailInput" required />
               <br />
-              <button type="submit" class="btn btn-info">Submit Employee</button>
+              <input type="hidden" id="employeeid" name="employeeid" ref="IDInput">
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" @click="updateEmployee">Save changes</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
           </div>
             </form>
           </div>

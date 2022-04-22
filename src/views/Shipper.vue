@@ -21,6 +21,31 @@ function submitShipper(e) {
   console.log(data)
 }
 
+let nameInput = ref(null);
+let phoneInput = ref(null);
+let IDInput = ref(null);
+
+function editShipper(shipper){
+  nameInput.value.value = shipper.name;
+  phoneInput.value.value = shipper.phone;
+  IDInput.value.value = shipper.shipperid
+  let modal = new bootstrap.Modal(document.querySelector('#edit-shipper'));
+  modal.show();
+}
+
+function updateShipper(e){
+  let form = e.target;
+  let data = Object.fromEntries(new FormData(form));
+  fetch("http://localhost:4000/shipper/update", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  console.log(data)
+}
+
 function deleteShipper(shipper) {
   fetch(`http://localhost:4000/shipper/deleteShipper/${shipper.shipperid}`, {
       method: "Delete",
@@ -32,7 +57,7 @@ function deleteShipper(shipper) {
 
 <template>
   <div id="shipper">
-    <form @submit.prevent="submitShipper" id="shipperForm">
+    <form @submit="submitShipper" id="shipperForm">
       <h4>Name</h4>
       <input type="text" name="name" id="name" class="form-control" required />
       <br />
@@ -64,7 +89,7 @@ function deleteShipper(shipper) {
             <button type="button" class="btn btn-danger" @click="deleteShipper(shipper)">Delete</button>
           </td>
           <td>
-            <button type="button" class="btn btn-success">Edit</button>
+            <button type="button" class="btn btn-success" @click="editShipper(shipper)">Edit</button>
           </td>
         </tr>
       </tbody>
@@ -78,19 +103,19 @@ function deleteShipper(shipper) {
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
         <div class="modal-body">
-            <form id="shipperUpdateForm">
+            <form id="shipperUpdateForm" @submit="updateShipper">
               <h4>Name</h4>
-              <input type="text" name="name" id="uname" class="form-control" required/>
+              <input type="text" name="name" id="uname" class="form-control" ref="nameInput" required/>
               <br />
               <h4>Phone Number</h4>
-              <input type="text" name="phone" id="nphone" class="form-control" required/>
+              <input type="text" name="phone" id="nphone" class="form-control" ref="phoneInput" required/>
               <br />
-              <button type="submit" class="btn btn-info">Submit Shipper</button>
-            </form>
-          </div>
+              <input type="hidden" name="shipperid" id="shipperid" ref="IDInput">
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" @click="updateShipper">Save changes</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+            </form>
           </div>
         </div>
       </div>
@@ -99,7 +124,13 @@ function deleteShipper(shipper) {
 </template>
 
 <style scoped>
-#shipperForm, #shipperUpdateForm {
+
+#shipperUpdateForm{
+    text-align: center;
+    padding: 30px;
+}
+
+#shipperForm {
   text-align: center;
   margin-top: 30px;
   border: 2px dotted black;
