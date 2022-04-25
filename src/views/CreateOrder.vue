@@ -6,6 +6,7 @@ let customers = ref([]);
 let employees = ref([]);
 let shippers = ref([]);
 
+
 onMounted(async () => {
   let pres = await fetch("http://localhost:4000/product", {method: "GET"});
   products.value = await pres.json();
@@ -37,7 +38,7 @@ function submitOrder(e){
 
 <template>
   <div id="orderform">
-    <form @submit.prevent="submitOrder" id="orderForm">
+    <form @submit="submitOrder" id="orderForm">
       <h4>Product</h4>
       <select name="productid" id="product" class="form-control">
         <option v-for="(product) in products" :key="product.id" :value="product.productid">{{product.name}}</option>

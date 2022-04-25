@@ -55,12 +55,19 @@ function updateSupplier(e){
 }
 
 
-function deleteSupplier(supplier) {
-  fetch(`http://localhost:4000/supplier/deleteSupplier/${supplier.supplierid}`, {
+async function deleteSupplier(supplier) {
+const res = await fetch(
+    `http://localhost:4000/supplier/deleteSupplier/${supplier.supplierid}`,
+    {
       method: "Delete",
       headers: { "content-type": "application/json" },
-    });
-    location.reload();
+    }
+  );
+  if(res.status == 400){
+    alert(`There was an error deleting this supplier. Please make sure that no orders have been made under this name before continuing.`)
+    return
+  }
+  location.reload();
 }
 </script>
 

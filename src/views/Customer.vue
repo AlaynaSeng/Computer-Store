@@ -56,14 +56,18 @@ function updateCustomer(e){
   console.log(data)
 }
 
-function deleteCustomer(customer) {
-  fetch(
+async function deleteCustomer(customer) {
+const res = await fetch(
     `http://localhost:4000/customer/deleteCustomer/${customer.customerid}`,
     {
       method: "Delete",
       headers: { "content-type": "application/json" },
     }
   );
+  if(res.status == 400){
+    alert(`There was an error deleting this customer. Please make sure that no orders have been made under this name before continuing.`)
+    return
+  }
   location.reload();
 }
 </script>

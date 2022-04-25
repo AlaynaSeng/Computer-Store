@@ -59,12 +59,19 @@ function updateProduct(e){
   console.log(data)
 }
 
-function deleteProduct(product) {
-  fetch(`http://localhost:4000/product/deleteProduct/${product.productid}`, {
+async function deleteProduct(product) {
+const res = await fetch(
+    `http://localhost:4000/product/deleteProduct/${product.productid}`,
+    {
       method: "Delete",
       headers: { "content-type": "application/json" },
-    });
-    location.reload();
+    }
+  );
+  if(res.status == 400){
+    alert(`There was an error deleting this product. Please make sure that no orders have been made under this product before continuing.`)
+    return
+  }
+  location.reload();
 }
 </script>
 

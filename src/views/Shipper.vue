@@ -46,12 +46,19 @@ function updateShipper(e){
   console.log(data)
 }
 
-function deleteShipper(shipper) {
-  fetch(`http://localhost:4000/shipper/deleteShipper/${shipper.shipperid}`, {
+async function deleteShipper(shipper) {
+const res = await fetch(
+    `http://localhost:4000/shipper/deleteShipper/${shipper.shipperid}`,
+    {
       method: "Delete",
       headers: { "content-type": "application/json" },
-    });
-    location.reload();
+    }
+  );
+  if(res.status == 400){
+    alert(`There was an error deleting this shipper. Please make sure that no orders have been made under this name before continuing.`)
+    return
+  }
+  location.reload();
 }
 </script>
 

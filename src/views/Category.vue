@@ -46,12 +46,19 @@ function updateCategory(e){
   console.log(data)
 }
 
-function deleteCategory(category) {
-  fetch(`http://localhost:4000/category/deleteCategory/${category.categoryid}`, {
+async function deleteCategory(category) {
+const res = await fetch(
+    `http://localhost:4000/category/deleteCategory/${category.categoryid}`,
+    {
       method: "Delete",
       headers: { "content-type": "application/json" },
-    });
-    location.reload();
+    }
+  );
+  if(res.status == 400){
+    alert(`There was an error deleting this category. Please make sure that no orders have been made under this category before continuing.`)
+    return
+  }
+  location.reload();
 }
 </script>
 
