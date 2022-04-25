@@ -32,7 +32,7 @@ let IDInput = ref(null);
 function editEmployee(employee){
   fnameInput.value.value = employee.fname;
   lnameInput.value.value = employee.lname;
-  bdayInput.value.value = employee.bday;
+  bdayInput.value.value = employee.bday.split("T")[0];
   emailInput.value.value = employee.email;
   IDInput.value.value = employee.employeeid
   let modal = new bootstrap.Modal(document.querySelector('#edit-employee'));
@@ -70,7 +70,7 @@ const res = await fetch(
 
 <template>
   <div id="employee">
-    <form @submit.prevent="submitEmployee" id="employeeForm">
+    <form @submit="submitEmployee" id="employeeForm">
       <h4>First Name</h4>
       <input type="text" name="fname" id="fname" class="form-control" required/>
       <br />

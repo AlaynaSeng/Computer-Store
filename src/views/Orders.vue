@@ -31,7 +31,7 @@ let IDInput = ref(null);
 function editOrder(order){
   productInput.value.value = order.productid;
   customerInput.value.value = order.customerid;
-  dateInput.value.value = order.date;
+  dateInput.value.value = order.date.split("T")[0];;
   employeeInput.value.value = order.employeeid;
   shipperInput.value.value = order.shipperid;
   IDInput.value.value = order.orderid

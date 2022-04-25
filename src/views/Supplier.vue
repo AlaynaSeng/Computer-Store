@@ -73,7 +73,7 @@ const res = await fetch(
 
 <template>
   <div id="supplier">
-    <form @submit.prevent="submitSupplier" id="supplierForm">
+    <form @submit="submitSupplier" id="supplierForm">
       <h4>Name</h4>
       <input type="text" name="name" id="name" class="form-control" required />
       <br />
