@@ -15,7 +15,14 @@ onMounted(async () => {
   console.log(products.value)
 });
 
+
+
 function submitProduct(e) {
+  let price = document.querySelector('#price').value
+  if(isNaN(price)){
+    alert("This is not a valid price, please input only valid numbers");
+    return
+  }
   let form = e.target;
   let data = Object.fromEntries(new FormData(form));
   fetch("http://localhost:4000/product", {
@@ -26,6 +33,7 @@ function submitProduct(e) {
     body: JSON.stringify(data)
   });
   console.log(data);
+  location.reload()
 }
 
 let nameInput = ref(null);
@@ -77,7 +85,7 @@ const res = await fetch(
 
 <template>
   <div id="product">
-    <form @submit="submitProduct" id="productForm">
+    <form @submit.prevent="submitProduct" id="productForm">
       <h4>Name</h4>
       <input type="text" name="name" id="name" class="form-control" required/>
       <br />
